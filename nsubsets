@@ -1,0 +1,33 @@
+class Solution {
+
+    public ArrayList<ArrayList<Integer>> subsets(int arr[]) {
+
+        ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+        ArrayList<Integer> curr = new ArrayList<>();
+
+        solve(arr, list, curr, 0);
+
+        return list;
+    }
+
+    public static void solve(int arr[],
+                             ArrayList<ArrayList<Integer>> list,
+                             ArrayList<Integer> curr,
+                             int i) {
+
+        if (i == arr.length) {
+            list.add(new ArrayList<>(curr));
+            return;
+        }
+
+        // Include
+        curr.add(arr[i]);
+        solve(arr, list, curr, i + 1);
+
+        // Backtrack
+        curr.remove(curr.size() - 1);
+
+        // Exclude
+        solve(arr, list, curr, i + 1);
+    }
+}
