@@ -1,0 +1,32 @@
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res =new ArrayList<>();
+ boolean [] visit = new boolean [nums.length];
+        solve(nums,res,new ArrayList<>(),visit);
+       
+        return res;
+    }
+    public void solve( int [] nums,List<List<Integer>> res,List<Integer> curr, boolean [] visit){
+
+     if(curr.size()==nums.length){
+        res.add(new ArrayList<>(curr));
+        return;
+     }
+
+     for(int i =0;i<nums.length;i++){
+        if(visit[i]){
+            continue;
+        }
+
+        visit[i]=true;
+
+        curr.add(nums[i]);
+
+        solve(nums,res,curr,visit);
+        curr.remove(curr.size()-1);
+        visit[i] = false;
+     }
+
+
+    }
+}
