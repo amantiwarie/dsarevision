@@ -1,0 +1,58 @@
+class Solution {
+    public String minWindow(String s, String t) {
+        if(t.length()>s.length()){
+            return "";
+        }
+
+           //pahle map me t bhar lo
+        HashMap<Character,Integer> map = new HashMap<>();
+        for(int i=0;i<t.length();i++){
+            map.put(t.charAt(i),map.getOrDefault(t.charAt(i),0)+1);
+        }
+
+        int length =t.length();
+        int min =Integer.MAX_VALUE;
+        int start =0;
+        int left =0;
+
+       //fir valid find karo
+        for(int right =0;right<s.length();right++){
+            char ch =s.charAt(right);
+
+
+            if(map.containsKey(ch)){
+                if(map.get(ch)>0){
+                length--;
+          
+                }
+                 map.put(ch,map.get(ch)-1);
+                     
+            }
+            while(length==0){
+
+                if(right-left+1<min){
+                    min = right-left+1;
+                    start =left;
+                }
+
+                char leftChar =s.charAt(left);
+
+                if (map.containsKey(leftChar)) {
+                    map.put(leftChar, map.get(leftChar) + 1);
+
+                    if (map.get(leftChar) > 0)
+                        length++;
+                }
+                left++;
+            }
+
+        }
+
+        return min == Integer.MAX_VALUE
+                ? ""
+                : s.substring(start, start + min);
+
+
+    }
+
+}
