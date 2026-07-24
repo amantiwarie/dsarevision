@@ -9,8 +9,6 @@ class Solution {
         // Add all numbers
         for (int num : nums) {
             set.add(num);
-
-
         }
 
         int maxLength = 1;
